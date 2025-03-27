@@ -57,11 +57,11 @@ create_environment:
 #################################################################################
 
 
-## Make dataset
+## Make dataset (download Omdena and Posadas datasets)
 .PHONY: data
 data: requirements
-	$(PYTHON_INTERPRETER) de_a_mentis/dataset.py
-
+	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-omdena
+	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-posadas
 
 #################################################################################
 # Self Documenting Commands                                                     #
