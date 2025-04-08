@@ -1,3 +1,4 @@
+# dataset.py
 from pathlib import Path
 from loguru import logger
 import typer
@@ -32,6 +33,7 @@ def download_posadas():
     for name, url in urls.items():
         logger.info(f"Downloading {name} set...")
         df = pd.read_excel(url)
+        df.columns = df.columns.str.strip().str.lower()  # ← Normaliza columnas
         df["split"] = name
         dfs.append(df)
 
