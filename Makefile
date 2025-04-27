@@ -57,11 +57,29 @@ create_environment:
 #################################################################################
 
 
-## Make dataset (download Omdena and Posadas datasets)
-.PHONY: data
-data: requirements
+## Download Omdena dataset
+.PHONY: data-omdena
+data-omdena: requirements
 	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-omdena
+
+## Download Posadas dataset
+.PHONY: data-posadas
+data-posadas: requirements
 	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-posadas
+
+## Download all datasets at once
+.PHONY: data-all
+data-all: requirements
+	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-all
+
+## Download all datasets at once
+.PHONY: process-all
+data-all: requirements
+	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset process-all
+
+## Make dataset (download all available datasets)
+.PHONY: data
+data: data-all
 
 #################################################################################
 # Self Documenting Commands                                                     #
