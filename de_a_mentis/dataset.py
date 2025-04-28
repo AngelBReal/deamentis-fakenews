@@ -354,6 +354,10 @@ def merge_datasets(
     
     # Crear ID único
     combined_df['id'] = [f'fn_{i:06d}' for i in range(len(combined_df))]
+
+    # Manejar valores nulos
+    combined_df['title'] = combined_df['title'].fillna("Sin Titulo")
+    combined_df['source'] = combined_df['source'].fillna("Sin Source")
     
     # Guardar el dataset combinado
     output_path.parent.mkdir(parents=True, exist_ok=True)
