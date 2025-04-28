@@ -273,6 +273,10 @@ def process_omdena_dataset(input_path: Path = RAW_DATA_DIR/"omdena/fake_news_lat
     # Limpieza básica
     df_clean['content'] = df_clean['content'].apply(clean_text)
     df_clean['title'] = df_clean['title'].apply(clean_text)
+
+    # Manejar valores nulos
+    df_clean['title'] = df_clean['title'].fillna("Sin Titulo")
+    df_clean['source'] = df_clean['source'].fillna("Sin Source")
     
     # Estandarizar etiquetas (todo en minúsculas)
     df_clean['label'] = df_clean['label'].str.lower()
@@ -306,9 +310,16 @@ def process_posadas_dataset(input_path: Path = RAW_DATA_DIR/"FakeNewsCorpusSpani
     # Limpieza básica
     df_clean['content'] = df_clean['content'].apply(clean_text)
     df_clean['title'] = df_clean['title'].apply(clean_text)
+
+    # Manejar valores nulos
+    df_clean['title'] = df_clean['title'].fillna("Sin Titulo")
+    df_clean['source'] = df_clean['source'].fillna("Sin Source")
     
     # Estandarizar etiquetas (todo en minúsculas)
     df_clean['label'] = df_clean['label'].str.lower()
+    
+    # Unificar "false" y "fake" como una sola categoría
+    df_clean['label'] = df_clean['label'].replace({'false': 'fake'})
     
     # Agregar origen del dataset
     df_clean['dataset_source'] = 'posadas'

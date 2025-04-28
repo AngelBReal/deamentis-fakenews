@@ -18,8 +18,6 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	
 
-
-
 ## Delete all compiled Python files
 .PHONY: clean
 clean:
@@ -72,9 +70,9 @@ data-posadas: requirements
 data-all: requirements
 	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset download-all
 
-## Download all datasets at once
+## Process all datasets at once
 .PHONY: process-all
-data-all: requirements
+process-all: requirements
 	cd src && $(PYTHON_INTERPRETER) -m de_a_mentis.dataset process-all
 
 ## Make dataset (download all available datasets)
